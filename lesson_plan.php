@@ -4,6 +4,38 @@
 	{
 		header("location: login.php");
 	}
+
+	if(isset($_POST)) {
+	//echo "In post";
+include("config.php");
+$l_name = $_POST['l_name'];
+$s_activity = $_POST['s_activity'];
+$obj=$_POST['obj'];
+$resource=$_POST['resource'];
+//$subj=$_POST["Subject"];
+/*
+$sql = "select subj_id from subjects where subject=$subj ;
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        $subj_id=row['subj_id'];
+    }
+
+*/
+$sql = "INSERT INTO learning_plan (name,starter_activity,objective,material) VALUES ('$l_name',$s_activity,'$obj','$resource')";
+
+if(mysqli_query($db, $sql)){
+    //echo "Records inserted successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
+}
+ 
+// Close connection
+mysqli_close($db);
+}
 ?>
 <!DOCTYPE html>
 <html>
