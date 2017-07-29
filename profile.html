@@ -223,28 +223,42 @@ function postComment(comment,video){
 	
 		<div id="videobox" class="col-md-8">
 			<div id="l1" class="row">
+				<h3>Lesson 1</h3>
 				<div id="col-l1" class="col-md-12">
-					
+    <div id="player"></div>
+    <button>Show Comments</button>
 
 
 				</div>
 			</div>
 			<div id="l2" class="row">
+								<h3>Lesson 2</h3>
+
 				<div id="col-l1" class="col-md-12">
+					    <div id="player"></div>
+
 					
 
 
 				</div>
 			</div>
 			<div id="l3" class="row">
+								<h3>Lesson 3</h3>
+
 				<div id="col-l1" class="col-md-12">
+					    <div id="player"></div>
+
 					
 
 
 				</div>
 			</div>
 			<div id="l4" class="row">
+								<h3>Lesson 4</h3>
+
 				<div id="col-l1" class="col-md-12">
+					    <div id="player"></div>
+
 					
 
 
@@ -311,9 +325,41 @@ function postComment(comment,video){
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
 <script>
+$(document).ready(function(){
+	$("#l2").hide()
+	$("#l3").hide()
+	$("#l4").hide()
+})
 $("#sel1").change(function(){
 	var lesson = $('#sel1').find(":selected").text();
-	console.log(lesson);
+	if(lesson=="Lesson 1"){
+		$("#l1").show()
+		$("#l2").hide()
+		$("#l3").hide()
+		$("#l4").hide()
+
+	}
+	else if(lesson=="Lesson 2"){
+		$("#l2").show()
+		$("#l1").hide()
+		$("#l3").hide()
+		$("#l4").hide()
+
+	}
+	else if(lesson=="Lesson 3"){
+		$("#l3").show()
+		$("#l2").hide()
+		$("#l1").hide()
+		$("#l4").hide()
+
+	}
+	else if(lesson=="Lesson 4"){
+		$("#l4").show()
+		$("#l2").hide()
+		$("#l3").hide()
+		$("#l1").hide()
+
+	}
 
 });
 var conceptName = $('#aioConceptName').find(":selected").text();
