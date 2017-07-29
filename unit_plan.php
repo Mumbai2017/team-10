@@ -1,4 +1,5 @@
 <?php
+
 //echo "Here";
 session_start();
 if(!isset($_SESSION['role']))
@@ -38,6 +39,9 @@ if(mysqli_query($db, $sql)){
 mysqli_close($db);
 }
 ?>
+
+
+
 
 
 
@@ -95,13 +99,16 @@ mysqli_close($db);
 				<span style="color: black">X</span>
 			</div>
 			<div class="side_bar_opt">
-				<a href="/cfg/unit_plan.php">Submit User Plan</a>
+				<a href="/unit_plan.php">Submit User Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<a href="/cfg/lesson_plan.php">Submit Lesson Plan</a>
+				<a href="/lesson_plan.php">Submit Lesson Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<a href="/cfg/update_learning.php">Update Learning Plan</a>
+				<a href="/update_learning.php">Update Learning Plan</a>
+			</div>
+			<div class="side_bar_opt">
+				<a href="/logout.php">Logout</a>
 			</div>
 		</div>
 		<!-- scripts -->

@@ -2,13 +2,26 @@
    if (isset($_POST['submit'])) {
    include("config.php");
    session_start();
+<<<<<<< HEAD
    
    
       // username and password sent from form 
+=======
+   if(!isset($_SESSION['role'])) {
+      if($_SERVER["REQUEST_METHOD"] == "POST") {
+        // username and password sent from form 
+        $myusername = mysqli_real_escape_string($db,$_POST['email']);
+        $mypassword = mysqli_real_escape_string($db,$_POST['pwd']); 
+        
+        $sql = "SELECT role FROM roles,users WHERE user_id = '$myusername' and password= '$mypassword' and roles.role_id=users.role_id";
+        $result = mysqli_query($db,$sql);
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);    
+>>>>>>> 53a074e16d9ea3f0f9f52e61cd6641123015a165
       
-      $myusername = mysqli_real_escape_string($db,$_POST['email']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['pwd']); 
+        $count = mysqli_num_rows($result);     
+        // If result matched $myusername and $mypassword, table row must be 1 row
       
+<<<<<<< HEAD
       $sql = "SELECT role FROM roles,users WHERE user_id = '$myusername' and password= '$mypassword' and roles.role_id=users.role_id";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -40,6 +53,31 @@
       }
    
  }
+=======
+        if($count == 1) { 
+         $role=$row["role"];
+          //$_SESSION['username']=$myusername;
+          $_SESSION['role']=$role;
+          echo $role;
+          if($role=="Teacher")
+            header('location: unit_plan.php');  
+          else if($role=="SME")
+            header('location: welcome_SME.php');
+          else if($role=="admin")
+            header("location: welcome_admin.php");
+        }else {
+           $error = "Your Login Name or Password is invalid";
+        }
+      }
+   } else {
+      if($_SESSION['role']=="Teacher")
+        header('location: unit_plan.php');  
+      else if($_SESSION['role']=="SME")
+        header('location: welcome_SME.php');
+      else if($_SESSION['role']=="admin")
+        header("location: welcome_admin.php");
+   }
+>>>>>>> 53a074e16d9ea3f0f9f52e61cd6641123015a165
 ?>
 
 
@@ -92,16 +130,16 @@ hr
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<div class="container">
+<div class="container" style="padding-top: 100px">
 
 <div class="section_header">
        <h2>Sign In to CEQUE...</h2>
 </div>
 <hr>
-<div class="format">
+<div class="format" style="width: 100%; max-width: 400px">
   <form action="" method="POST" >
     <div class="form-group">
-	
+  
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
     </div>
@@ -112,6 +150,7 @@ hr
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
+<<<<<<< HEAD
 	</div>
     <center><button type="submit" class="btn btn-default" value="submit" name="submit">Submit</button></center>
 	<div style="color:red;text-align:center;">
@@ -121,6 +160,17 @@ hr
 		}
 	?>
 	</div>
+=======
+  </div>
+    <center><button type="submit" class="btn btn-default">Submit</button></center>
+  <div style="color:red;text-align:center; margin-top: 20px">
+  <?php if(isset($error))
+  {
+        echo $error;
+    }
+  ?>
+  </div>
+>>>>>>> 53a074e16d9ea3f0f9f52e61cd6641123015a165
   </form>
 </div>
 

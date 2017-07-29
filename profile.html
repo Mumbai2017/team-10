@@ -114,7 +114,15 @@
     request.execute(function(response) {
       console.log(response);
       commentlist = response;
-      loadComments(commentlist)
+      try{
+      	console.log(commentlist['kind'])
+      	if((commentlist['kind']).toString()=="youtube#commentThreadListResponse")
+      	loadComments(commentlist)
+      }
+      catch(err){
+
+      }
+      
     });
   }
 
@@ -160,10 +168,9 @@
       commenter = commentlist['items'][i]['snippet']['topLevelComment']['snippet']['authorDisplayName']
       name = "<b>"+commenter+"</b>"
       comment = "<p>"+comm+"</p>"
-      $('#commentbox').append(name);
+      $('#commentbox').append("<div id="+i+">"+name+comment+"</div>");
 
 
-    $('#commentbox').append(comment);
 
 
 
@@ -182,23 +189,25 @@ function postComment(comment,video){
                 {'part': 'snippet'},
                 {'snippet.channelId': '0-90-i',
                  'snippet.videoId': 'M7lc1UVf-VE',
-                 'snippet.topLevelComment.snippet.textOriginal': 'HellooooooSuhail'
+                 'snippet.topLevelComment.snippet.textOriginal': comment
       });
 
 
 }
- 
-  console.log("Done");
 
+$(".submitcomment").click(function(){
+	var x=$(this).siblings("#comment").val();
 
+	postComment(x,"sdfg");
 
-
-
-
-
+console.log("WTF");
 
 
 });
+
+
+});
+
 
 
 
@@ -226,7 +235,9 @@ function postComment(comment,video){
 		<div id="videobox" class="col-md-8">
 			<div id="l1" class="row">
 				<h3>Lesson 1</h3>
+
 				<div id="col-l1" class="col-md-12">
+					<p id="display"></p>
     <div id="player"></div>
     <button id="M7lc1UVf-VE" class="commentbutton">Show Comments</button>
 
@@ -270,8 +281,24 @@ function postComment(comment,video){
 			</div>
 
 
-		<div id="commentbox" class="col-md-4">
+		<div id="commentbox1" class="col-md-4">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+  <label for="comment">Comment:</label>
+  <textarea class="form-control" rows="5" id="comment"></textarea>
+  <button class="submitcomment">Submit Comment</button>
+</div>
+				</div>
 
+
+			</div>
+			<div class="row">
+				<div id="commentbox" class="col-md-12">
+				</div>
+
+
+			</div>
 		</div>
 
 	</div>
@@ -281,7 +308,7 @@ function postComment(comment,video){
 	<script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
-
+display = document.getElementById('display');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -289,10 +316,12 @@ function postComment(comment,video){
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       var player;
+      var timer, timeSpent = []
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
           height: '390',
           width: '640',
+
           videoId: 'M7lc1UVf-VE',
           events: {
             'onReady': onPlayerReady,
@@ -305,12 +334,19 @@ function postComment(comment,video){
       function onPlayerReady(event) {
         event.target.playVideo();
       }
+      function record(){
+	timeSpent[ parseInt(player.getCurrentTime()) ] = true;
+	showPercentage();
+}
+
+
 
       // 5. The API calls this function when the player's state changes.
       //    The function indicates that when playing a video (state=1),
       //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
+      	
         if (event.data == YT.PlayerState.PLAYING && !done) {
           setTimeout(stopVideo, 6000);
           done = true;
@@ -319,6 +355,30 @@ function postComment(comment,video){
       function stopVideo() {
         player.stopVideo();
       }
+      window.setInterval(function(){
+      	      var p = player.getCurrentTime()
+      	      console.log(p)
+      	      highlight(p);
+
+
+  /// call your function here
+}, 2000);
+
+   function highlight(p){
+   	var v =$("#commentbox").children();
+   	var t = v.length
+   	var q=player.getDuration()
+   	 var m = (p*t/q);
+
+   	 console.log(m);
+   	 m=parseInt(m)
+   	 m=m.toString()
+   	 $( "#commentbox" ).children().css( "background-color", "white" );
+
+   	 $('#'+m).css("background-color","blue")
+
+
+   }   
 
     </script>
 
@@ -364,7 +424,6 @@ $("#sel1").change(function(){
 	}
 
 });
-var conceptName = $('#aioConceptName').find(":selected").text();
 $(".commentbutton").click(function(){
 	var id = $(this).attr('id');
 	console.log(id);
@@ -376,6 +435,8 @@ $(".commentbutton").click(function(){
 
 
 });
+
+
 
 
 </script>
