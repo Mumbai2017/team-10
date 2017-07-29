@@ -1,8 +1,30 @@
-<html><head><title>Google APIs - Sample JS Page</title>
+<html>
+<head>
+
+
+<html lang="en-US">
+
+
+<title>Google APIs - Sample JS Page</title>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 </head>
 <body>
+
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
 
 <script>
 
@@ -138,6 +160,8 @@
   function defineRequest() {
     // See full sample for buildApiRequest() code, which is not 
 // specific to a particular youtube or youtube method.
+
+
 
 
   buildApiRequest('GET',
