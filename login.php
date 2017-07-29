@@ -33,8 +33,7 @@
 		  header('location: welcome_SME.php');
 		else if($role=="admin")
 				header("location: welcome_admin.php");
-		echo "Hello ".$myusername." <br>Role:".$role;
-         header("location: welcome.php");
+		
       }else {
          $error = "Your Login Name or Password is invalid";
       }
