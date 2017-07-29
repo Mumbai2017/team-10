@@ -1,31 +1,16 @@
+<!DOCTYPE html>
+
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<html lang="en-US">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-
-<title>Google APIs - Sample JS Page</title>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-</head>
-<body>
-
-<div id="google_translate_element"></div>
-
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-}
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
-
-
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
 
   /***** START BOILERPLATE CODE: Load client library, authorize user. *****/
@@ -162,8 +147,6 @@ function googleTranslateElementInit() {
 // specific to a particular youtube or youtube method.
 
 
-
-
   buildApiRequest('GET',
                 '/youtube/v3/commentThreads',
                 {'part': 'snippet,replies',
@@ -192,13 +175,19 @@ function googleTranslateElementInit() {
     // See full sample for buildApiRequest() code, which is not 
 // specific to a particular youtube or youtube method.
 $(window).load(function(){
-  buildApiRequest('POST',
+
+function postComment(comment,video){
+	 buildApiRequest('POST',
                 '/youtube/v3/commentThreads',
                 {'part': 'snippet'},
                 {'snippet.channelId': '0-90-i',
                  'snippet.videoId': 'M7lc1UVf-VE',
                  'snippet.topLevelComment.snippet.textOriginal': 'HellooooooSuhail'
       });
+
+
+}
+ 
   console.log("Done");
 
 
@@ -214,11 +203,22 @@ $(window).load(function(){
   
 
 </script>
+</head>
 
-<button id="execute-request-button">Authorize</button>
-    <div id="player"></div>
-    <div id ="commentbox"></div>
-    <script>
+<body>
+
+	
+		<div class="col-md-4">
+		</div>
+
+		<div class="col-md-4">
+		</div>
+
+	</div>
+
+
+
+	<script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
@@ -266,4 +266,6 @@ $(window).load(function(){
         onload="this.onload=function(){};handleClientLoad()" 
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
-</body></html>
+
+</body>
+</html>
