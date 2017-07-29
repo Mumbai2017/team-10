@@ -11,6 +11,17 @@ hr
 	margin: 30px auto;
 }
 
+a
+{
+	color: #111111;
+}
+
+a:hover
+{
+	text-decoration: none;
+	color: white;
+}
+
 .header
 {
 	width: 100%;
@@ -37,9 +48,8 @@ hr
     font-size: 20px;
 }
 
-.side_bar_opt:hover
+.side_bar_opt:hover a
 {
-	background-color: #111111;
 	color: white;
 }
 
