@@ -147,14 +147,14 @@
 // specific to a particular youtube or youtube method.
 
 
-  buildApiRequest('GET',
-                '/youtube/v3/commentThreads',
-                {'part': 'snippet,replies',
-                 'videoId': 'M7lc1UVf-VE'});
+  
 
   }
 
   function loadComments(commentlist){
+  	      $('#commentbox').empty();
+
+
     for(i=0;i<commentlist['items'].length;i++){
       comm = commentlist['items'][i]['snippet']['topLevelComment']['snippet']['textOriginal']
       commenter = commentlist['items'][i]['snippet']['topLevelComment']['snippet']['authorDisplayName']
@@ -196,6 +196,8 @@ function postComment(comment,video){
 
 
 
+
+
 });
 
 
@@ -226,7 +228,7 @@ function postComment(comment,video){
 				<h3>Lesson 1</h3>
 				<div id="col-l1" class="col-md-12">
     <div id="player"></div>
-    <button>Show Comments</button>
+    <button id="M7lc1UVf-VE" class="commentbutton">Show Comments</button>
 
 
 				</div>
@@ -363,6 +365,17 @@ $("#sel1").change(function(){
 
 });
 var conceptName = $('#aioConceptName').find(":selected").text();
+$(".commentbutton").click(function(){
+	var id = $(this).attr('id');
+	console.log(id);
+	  buildApiRequest('GET',
+                '/youtube/v3/commentThreads',
+                {'part': 'snippet,replies',
+                 'videoId': id});
+	  console.log("Hell yeah")
+
+
+});
 
 
 </script>
