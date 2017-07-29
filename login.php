@@ -1,12 +1,6 @@
 <?php
-   if (isset($_POST['submit'])) {
    include("config.php");
    session_start();
-<<<<<<< HEAD
-   
-   
-      // username and password sent from form 
-=======
    if(!isset($_SESSION['role'])) {
       if($_SERVER["REQUEST_METHOD"] == "POST") {
         // username and password sent from form 
@@ -16,44 +10,10 @@
         $sql = "SELECT role FROM roles,users WHERE user_id = '$myusername' and password= '$mypassword' and roles.role_id=users.role_id";
         $result = mysqli_query($db,$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);    
->>>>>>> 53a074e16d9ea3f0f9f52e61cd6641123015a165
       
         $count = mysqli_num_rows($result);     
         // If result matched $myusername and $mypassword, table row must be 1 row
       
-<<<<<<< HEAD
-      $sql = "SELECT role FROM roles,users WHERE user_id = '$myusername' and password= '$mypassword' and roles.role_id=users.role_id";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      
-     
-	  
-	  
-      $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count == 1) {
-		 
-		  
-		   $role=$row["role"];
-		  
-		  
-        echo $role;
-         $_SESSION['login_user'] = $myusername;
-        if($role=="Teacher")
-			header('location: unit_plan.php');  
-		else if($role=="SME")
-		  header('location: welcome_sme.php');
-		else if($role=="admin")
-				header("location: welcome_admin.php");
-		
-      }else {
-         $error = "Your Login Name or Password is invalid";
-      }
-   
- }
-=======
         if($count == 1) { 
          $role=$row["role"];
           //$_SESSION['username']=$myusername;
@@ -77,7 +37,6 @@
       else if($_SESSION['role']=="admin")
         header("location: welcome_admin.php");
    }
->>>>>>> 53a074e16d9ea3f0f9f52e61cd6641123015a165
 ?>
 
 
@@ -150,17 +109,6 @@ hr
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
-<<<<<<< HEAD
-	</div>
-    <center><button type="submit" class="btn btn-default" value="submit" name="submit">Submit</button></center>
-	<div style="color:red;text-align:center;">
-	<?php if(isset($error))
-	{
-		    echo $error;
-		}
-	?>
-	</div>
-=======
   </div>
     <center><button type="submit" class="btn btn-default">Submit</button></center>
   <div style="color:red;text-align:center; margin-top: 20px">
@@ -170,7 +118,6 @@ hr
     }
   ?>
   </div>
->>>>>>> 53a074e16d9ea3f0f9f52e61cd6641123015a165
   </form>
 </div>
 
