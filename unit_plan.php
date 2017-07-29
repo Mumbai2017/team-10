@@ -13,8 +13,6 @@
 		</div>
 		<div class="jumbotron">
 			<div class="container">
-			</div>
-			<div class="container">
 				<div class="section_header">
 					<h2>Submit Your Unit Plan...</h2>
 				</div>
@@ -53,13 +51,13 @@
 				<span style="color: black">X</span>
 			</div>
 			<div class="side_bar_opt">
-				<p>Submit User Plan</p>
+				<a href="/cfg/unit_plan.php">Submit User Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<p>Submit Lesson Plan</p>
+				<a href="/cfg/lesson_plan.php">Submit Lesson Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<p>Update Learning Plan</p>
+				<a href="/cfg/update_learning.php">Update Learning Plan</a>
 			</div>
 		</div>
 		<!-- scripts -->

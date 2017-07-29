@@ -13,33 +13,27 @@
 		</div>
 		<div class="jumbotron">
 			<div class="container">
-			</div>
-			<div class="container">
 				<div class="section_header">
-					<h2>Submit Your Unit Plan...</h2>
+					<h2>Submit Your Lesson Plan...</h2>
 				</div>
 				<hr>
 				<div class="form_container">
 					<form>
 						<div class="form-group">
-					    	<label for="unit_name">Unit Name</label>
-					    	<input type="text" class="form-control" id="unit_name" name="unit_name">
+					    	<label>Lesson Name</label>
+					    	<input type="text" class="form-control" id="lesson_name" name="l_name">
 					  	</div>
 					  	<div class="form-group">
-					    	<label for="theme_unit">Theme Unit</label>
-					    	<input type="text" class="form-control" id="theme_unit" name="theme_unit">
+					    	<label>Starter Activity</label>
+					    	<input type="text" class="form-control" id="s_activity" name="s_activity">
 					  	</div>
 					  	<div class="form-group">
-					    	<label for="lesson_1">Lesson no</label>
-					    	<input type="text" class="form-control" id="lesson-no-1" name="lesson_1">
+					    	<label>Objective</label>
+					    	<input type="text" class="form-control" id="obj" name="obj">
 					  	</div>
 					  	<div class="form-group">
-					    	<label for="lesson_2">Lesson no</label>
-					    	<input type="text" class="form-control" id="lesson-no-2" name="lesson_2">
-					  	</div>
-					  	<div class="form-group">
-					    	<label for="lesson_3">Lesson no</label>
-					    	<input type="text" class="form-control" id="lesson-no-3" name="lesson_3">
+					    	<label>Resource</label>
+					    	<input type="text" class="form-control" id="resource" name="resource">
 					  	</div>
 					  	<div style="text-align: center; margin-top: 30px">
 					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px">Submit</button>
@@ -53,13 +47,13 @@
 				<span style="color: black">X</span>
 			</div>
 			<div class="side_bar_opt">
-				<p>Submit User Plan</p>
+				<a href="/cfg/unit_plan.php">Submit User Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<p>Submit Lesson Plan</p>
+				<a href="/cfg/lesson_plan.php">Submit Lesson Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<p>Update Learning Plan</p>
+				<a href="/cfg/update_learning.php">Update Learning Plan</a>
 			</div>
 		</div>
 		<!-- scripts -->
