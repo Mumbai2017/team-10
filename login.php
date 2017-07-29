@@ -27,7 +27,7 @@
 		  
         echo $role;
          $_SESSION['login_user'] = $myusername;
-        if($role==="Teacher")
+        if($role=="Teacher")
 			header('location: unit_plan.php');  
 		else if($role=="SME")
 		  header('location: welcome_SME.php');
