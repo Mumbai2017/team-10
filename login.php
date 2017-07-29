@@ -1,8 +1,9 @@
 <?php
+   if (isset($_POST['submit'])) {
    include("config.php");
    session_start();
    
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
+   
       // username and password sent from form 
       
       $myusername = mysqli_real_escape_string($db,$_POST['email']);
@@ -30,14 +31,15 @@
         if($role=="Teacher")
 			header('location: unit_plan.php');  
 		else if($role=="SME")
-		  header('location: welcome_SME.php');
+		  header('location: welcome_sme.php');
 		else if($role=="admin")
 				header("location: welcome_admin.php");
 		
       }else {
          $error = "Your Login Name or Password is invalid";
       }
-   }
+   
+ }
 ?>
 
 
@@ -111,7 +113,7 @@ hr
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
 	</div>
-    <center><button type="submit" class="btn btn-default">Submit</button></center>
+    <center><button type="submit" class="btn btn-default" value="submit" name="submit">Submit</button></center>
 	<div style="color:red;text-align:center;">
 	<?php if(isset($error))
 	{
