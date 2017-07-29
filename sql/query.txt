@@ -1,0 +1,23 @@
+create table `ceque`.`standards`(std_id int primary key AUTO_INCREMENT,std int);
+create table `ceque`.`subjects`(subj_id int primary key AUTO_INCREMENT,subject varchar(50));
+
+create table `ceque`.`units`(`unit_name` varchar(40), `unit_id` INT NOT NULL AUTO_INCREMENT  PRIMARY KEY,`subj_id` int,`std_id` int, foreign key(`subj_id`) references subjects(`subj_id`),foreign key(`std_id`) references standards(`std_id`));
+
+create table `ceque`.`roles`(`role` varchar(40), `role_id` INT NOT NULL AUTO_INCREMENT  PRIMARY KEY);
+
+Create table `ceque`.`users`(`user_id` varchar(35) primary key,`password` varchar(40), `role_id` int,foreign key(`role_id`) references roles(`role_id`));
+
+
+
+CREATE TABLE `ceque`.`learning_plan` ( `lp_id` int primary key AUTO_INCREMENT NOT NULL , `unit_id` int, `user_id` VARCHAR(35) NOT NULL , `name` VARCHAR(35) , `purpose` VARCHAR(35) ,`material` varchar(60),  `objective` VARCHAR(35),`feedback` varchar(35), foreign key(`user_id`) REFERENCES users(`user_id`),foreign key(`unit_id`) references units(`unit_id`) ) ENGINE = InnoDB;
+
+Create table `ceque`.`videos`(`video_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(100));
+
+CREATE TABLE `ceque`.`feedback` (`dt_time` datetime,`lp_id` int ,`feedback` varchar(250), `feedback_id` int primary key AUTO_INCREMENT NOT NULL,foreign key(`lp_id`) references learning_plan(`lp_id`));
+
+ALTER TABLE `videos`
+ADD user_id varchar(35);
+
+ALTER TABLE videos
+ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
+

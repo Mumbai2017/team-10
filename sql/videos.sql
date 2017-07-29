@@ -1,5 +1,5 @@
 Create table 'ceque'.'videos'
-('video_id' INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+('video_id' varchar(40) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 name varchar(100));
 
 ALTER TABLE 'videos'
