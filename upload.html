@@ -7,6 +7,7 @@
 
   // Global variables for GoogleAuth object, auth status.
   var GoogleAuth;
+  var commentlist
 
   /**
    * Load the API's client and auth2 modules.
@@ -102,6 +103,8 @@
   function executeRequest(request) {
     request.execute(function(response) {
       console.log(response);
+      commentlist = response;
+      loadComments(commentlist)
     });
   }
 
@@ -133,16 +136,36 @@
     // See full sample for buildApiRequest() code, which is not 
 // specific to a particular youtube or youtube method.
 
-buildApiRequest('GET',
-                '/youtube/v3/videos',
-                {'id': 'snpatsa1kRw',
-                 'part': 'snippet,contentDetails,statistics'});
+
+  buildApiRequest('GET',
+                '/youtube/v3/commentThreads',
+                {'part': 'snippet,replies',
+                 'videoId': 'M7lc1UVf-VE'});
 
   }
+
+  function loadComments(commentlist){
+    for(i=0;i<commentlist['items'].length;i++){
+      comm = commentlist['items'][i]['snippet']['topLevelComment']['snippet']['textOriginal']
+      commenter = commentlist['items'][i]['snippet']['topLevelComment']['snippet']['authorDisplayName']
+      name = "<b>"+commenter+"</b>"
+      comment = "<p>"+comm+"</p>"
+      $('#commentbox').append(name);
+
+
+    $('#commentbox').append(comment);
+
+
+
+    }
+    
+  }
+
 </script>
 
 <button id="execute-request-button">Authorize</button>
     <div id="player"></div>
+    <div id ="commentbox"></div>
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -184,6 +207,7 @@ buildApiRequest('GET',
       function stopVideo() {
         player.stopVideo();
       }
+
     </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
