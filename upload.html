@@ -1,4 +1,7 @@
-<html><head><title>Google APIs - Sample JS Page</title></head>
+<html><head><title>Google APIs - Sample JS Page</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
 <body>
 
 <script>
@@ -158,8 +161,33 @@
 
 
     }
-    
+   
+
   }
+
+    // See full sample for buildApiRequest() code, which is not 
+// specific to a particular youtube or youtube method.
+$(window).load(function(){
+  buildApiRequest('POST',
+                '/youtube/v3/commentThreads',
+                {'part': 'snippet'},
+                {'snippet.channelId': '0-90-i',
+                 'snippet.videoId': 'M7lc1UVf-VE',
+                 'snippet.topLevelComment.snippet.textOriginal': 'HellooooooSuhail'
+      });
+  console.log("Done");
+
+
+
+
+
+
+
+});
+
+
+
+  
 
 </script>
 
@@ -210,7 +238,6 @@
 
     </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script async defer src="https://apis.google.com/js/api.js" 
         onload="this.onload=function(){};handleClientLoad()" 
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
