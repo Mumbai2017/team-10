@@ -9,6 +9,7 @@
   // Global variables for GoogleAuth object, auth status.
   var GoogleAuth;
 var selectedFile;
+var Vid;
 
   /**
    * Load the API's client and auth2 modules.
@@ -458,11 +459,13 @@ $("#select-file-button").click(function () {
         }.bind(this),
         onComplete: function(data) {
           var uploadResponse = JSON.parse(data);
+          Vid = uploadResponse;
           console.log('Upload complete for video ' + uploadResponse.id);
         }.bind(this)
       });
 
     uploader.upload();
+    window.location.href = "savelink.php?w1="+Vid;
   }
 </script>
 
