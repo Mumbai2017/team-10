@@ -459,13 +459,15 @@ $("#select-file-button").click(function () {
         }.bind(this),
         onComplete: function(data) {
           var uploadResponse = JSON.parse(data);
-          Vid = uploadResponse;
+          Vid = uploadResponse.id;
           console.log('Upload complete for video ' + uploadResponse.id);
+              window.location.href = "savelink.php?link="+Vid;
         }.bind(this)
+
+
       });
 
     uploader.upload();
-    window.location.href = "savelink.php?w1="+Vid;
   }
 </script>
 
