@@ -1,6 +1,14 @@
 
-<html><head><title>Google APIs - Sample JS Page</title></head>
+<html><head><title>Google APIs - Sample JS Page</title>
+<style type="text/css">
+body{
+  background-color: #333;
+
+}
+</style>
+</head>
 <body>
+
 
 <script>
 
@@ -472,10 +480,15 @@ $("#select-file-button").click(function () {
   }
 </script>
 
-
-<button id="execute-request-button">Authorize</button>
+<div style="padding:20px;height:200px;width:400px;margin:300 auto;border-radius:5px;background-color:#eee">
+  <h2 style="text-align:center">Upload A Video</h2>
+  <hr>
+  <button style="width:100px;height:30px;background-color:#333;color:white;" id="execute-request-button">Authorize</button>
   <input id="select-file" type="file" name="select file"><br><br>
-  <button id="upload-file-button">Upload file</button>
+  <button style="width:100px;height:30px;background-color:#333;color:white;" id="upload-file-button">Upload file</button>
+
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script async defer src="https://apis.google.com/js/api.js" 
