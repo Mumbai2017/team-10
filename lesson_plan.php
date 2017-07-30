@@ -1,41 +1,29 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['role']))
-	{
-		header("location: login.php");
+
+//echo "Here";
+session_start();
+if(!isset($_SESSION['role']))
+{
+	
+    header('location:login.php');
+}
+//echo "skipped";
+if(isset($_POST['save'])) {
+		include("config.php");
+		$user_id = $_SESSION['user_id'];
+		$l_name = $_POST['l_name'];
+		$s_activity = $_POST['s_activity'];
+		$obj=$_POST['obj'];
+		$resource=$_POST['resource'];
+
+		$sql = "INSERT INTO learning_plan (user_id,name,starter_activity,objective,material) VALUES ('$user_id','$l_name','$s_activity','$obj','$resource')";
+
+		if(mysqli_query($db, $sql)){
+		    //echo "Records inserted successfully.";
+		} else{
+		    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
+		}
 	}
-
-	if(isset($_POST)) {
-	//echo "In post";
-include("config.php");
-$l_name = $_POST['l_name'];
-$s_activity = $_POST['s_activity'];
-$obj=$_POST['obj'];
-$resource=$_POST['resource'];
-//$subj=$_POST["Subject"];
-/*
-$sql = "select subj_id from subjects where subject=$subj ;
-
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        $subj_id=row['subj_id'];
-    }
-
-*/
-$sql = "INSERT INTO learning_plan (name,starter_activity,objective,material) VALUES ('$l_name',$s_activity,'$obj','$resource')";
-
-if(mysqli_query($db, $sql)){
-    //echo "Records inserted successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
-}
- 
-// Close connection
-mysqli_close($db);
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,7 +45,7 @@ mysqli_close($db);
 				</div>
 				<hr>
 				<div class="form_container">
-					<form>
+					<form method="POST">
 						<div class="form-group">
 					    	<label>Lesson Name</label>
 					    	<input type="text" class="form-control" id="lesson_name" name="l_name">
@@ -74,8 +62,9 @@ mysqli_close($db);
 					    	<label>Resource</label>
 					    	<input type="text" class="form-control" id="resource" name="resource">
 					  	</div>
+					  	<div type="hidden" name="is_submit" value=1></div>
 					  	<div style="text-align: center; margin-top: 30px">
-					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px">Submit</button>
+					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px" name="save">Submit</button>
 					  	</div>
 					</form>
 				</div>
