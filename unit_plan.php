@@ -90,6 +90,58 @@ mysqli_close($db);
 					  	<div style="text-align: center; margin-top: 30px">
 					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px">Submit</button>
 					  	</div>
+						
+						<div>
+						<p>Upload image of your work, if you like!</p>
+						<form action="imgup.php" method="post"
+enctype="multipart/form-data">
+<label for="file">Filename:</label>
+<input type="file" name="file" id="file"><br>
+<input type="submit" name="submit" value="Submit">
+</form>
+
+<?php
+if(isset($_POST['submit'])) {
+
+$target_dir = "\images";
+$target_file = $target_dir.basename($_FILES["file"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+
+
+ $image=basename( $_FILES["file"]["name"],".jpg");
+echo $image;
+  // used to store the filename in a variable
+
+    //store in the data in your database
+ $conn = mysqli_connect("localhost","root","");
+// Check connection
+ mysqli_select_db($conn,'ceque');
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "INSERT INTO imgup VALUES ('$image')";
+    mysql_query($sql); 
+
+if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+
+    
+
+
+}
+
+?>
+
+						
+						</div>
 					</form>
 				</div>
 			</div>
