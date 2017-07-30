@@ -7,22 +7,22 @@
         $myusername = mysqli_real_escape_string($db,$_POST['email']);
         $mypassword = mysqli_real_escape_string($db,$_POST['pwd']); 
         
-        $sql = "SELECT role FROM roles,users WHERE user_id = '$myusername' and password= '$mypassword' and roles.role_id=users.role_id";
+        $sql = "SELECT roles.role,users.user_id FROM roles,users WHERE user_id = '$myusername' and password= '$mypassword' and roles.role_id=users.role_id";
         $result = mysqli_query($db,$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);    
-      
+        
         $count = mysqli_num_rows($result);     
         // If result matched $myusername and $mypassword, table row must be 1 row
-      
+        echo $count;
         if($count == 1) { 
          $role=$row["role"];
           //$_SESSION['username']=$myusername;
           $_SESSION['role']=$role;
-          echo $role;
+          $_SESSION['user_id']=$row["user_id"];
           if($role=="Teacher")
             header('location: unit_plan.php');  
           else if($role=="SME")
-            header('location: welcome_SME.php');
+            header('location: welcome_sme.php');
           else if($role=="admin")
             header("location: welcome_admin.php");
         }else {
@@ -33,9 +33,10 @@
       if($_SESSION['role']=="Teacher")
         header('location: unit_plan.php');  
       else if($_SESSION['role']=="SME")
-        header('location: welcome_SME.php');
+        header('location: welcome_sme.php');
       else if($_SESSION['role']=="admin")
         header("location: welcome_admin.php");
+     // echo $_SESSION['role'];
    }
 ?>
 
@@ -92,7 +93,7 @@ hr
 <div class="container" style="padding-top: 100px">
 
 <div class="section_header">
-       <h2>Sign In to CEQUE...</h2>
+       <h2>Sign In to CEQ-SHA..</h2>
 </div>
 <hr>
 <div class="format" style="width: 100%; max-width: 400px">

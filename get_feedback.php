@@ -1,6 +1,7 @@
 <?php
 
 //echo "Here";
+include("config.php");
 session_start();
 if(!isset($_SESSION['role']))
 {
@@ -8,23 +9,10 @@ if(!isset($_SESSION['role']))
     header('location:login.php');
 }
 //echo "skipped";
-if(isset($_POST['save'])) {
-		include("config.php");
-		$user_id = $_SESSION['user_id'];
-		$l_name = $_POST['l_name'];
-		$s_activity = $_POST['s_activity'];
-		$obj=$_POST['obj'];
-		$resource=$_POST['resource'];
-
-		$sql = "INSERT INTO learning_plan (user_id,name,starter_activity,objective,material) VALUES ('$user_id','$l_name','$s_activity','$obj','$resource')";
-
-		if(mysqli_query($db, $sql)){
-		    //echo "Records inserted successfully.";
-		} else{
-		    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
-		}
-	}
+$u_id = $_SESSION["user_id"];
+$sql = "SELECT user_id,lp_id,feedback FROM feedback WHERE user_id='$u_id'";
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -38,35 +26,28 @@ if(isset($_POST['save'])) {
 				<span>&#9776</span>
 			</div>
 		</div>
+
 		<div class="jumbotron">
 			<div class="container">
 				<div class="section_header">
-					<h2>Submit Your Lesson Plan...</h2>
+					<h2>See Feedback For You..</h2>
 				</div>
 				<hr>
 				<div class="form_container">
-					<form method="POST">
-						<div class="form-group">
-					    	<label>Lesson Name</label>
-					    	<input type="text" class="form-control" id="lesson_name" name="l_name">
-					  	</div>
-					  	<div class="form-group">
-					    	<label>Starter Activity</label>
-					    	<input type="text" class="form-control" id="s_activity" name="s_activity">
-					  	</div>
-					  	<div class="form-group">
-					    	<label>Objective</label>
-					    	<input type="text" class="form-control" id="obj" name="obj">
-					  	</div>
-					  	<div class="form-group">
-					    	<label>Resource</label>
-					    	<input type="text" class="form-control" id="resource" name="resource">
-					  	</div>
-					  	<div type="hidden" name="is_submit" value=1></div>
-					  	<div style="text-align: center; margin-top: 30px">
-					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px" name="save">Submit</button>
-					  	</div>
-					</form>
+					<?php
+						$result = mysqli_query($db,$sql);
+						while($row=mysqli_fetch_assoc($result)) {
+						    echo '
+							<div class="feedback">
+								<div>
+								Lesson Plan Id : '.$row["lp_id"].	
+								'</div>
+								<div>
+								Feedback : '.$row["feedback"].	
+								'</div>
+							</div>';
+						}		
+					?>
 				</div>
 			</div>
 		</div>
@@ -87,7 +68,7 @@ if(isset($_POST['save'])) {
 				<a href="/lesson_plan.php">Submit Lesson Plan</a>
 			</div>
 			<div class="side_bar_opt">
-				<a href="/get_feedback.php">Update Learning Plan</a>
+				<a href="/get_feedback.php">Get feedbacks</a>
 			</div>
 			<div class="side_bar_opt">
 				<a href="/logout.php">Logout</a>

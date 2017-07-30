@@ -1,28 +1,41 @@
 <?php
+	session_start();
+	if(!isset($_SESSION['role']))
+	{
+		header("location: login.php");
+	}
 
-//echo "Here";
-session_start();
-if(!isset($_SESSION['role']))
-{
-	
-    header('location:login.php');
-}
-//echo "skipped";
-if(isset($_POST['save'])) {
-		include("config.php");
-		$user_id = $_SESSION['user_id'];
-		$l_name = $_POST['l_name'];
-		$s_activity = $_POST['s_activity'];
-		$obj=$_POST['obj'];
-		$resource=$_POST['resource'];
+	if(isset($_POST['save'])) {
+	//echo "In post";
+	include("config.php");
+	$feedback = $_POST['feedback'];
+	$lp= $_POST['lp'];
+	//$subj=$_POST["Subject"];
+	/*
+	$sql = "select subj_id from subjects where subject=$subj ;
 
-		$sql = "INSERT INTO learning_plan (user_id,name,starter_activity,objective,material) VALUES ('$user_id','$l_name','$s_activity','$obj','$resource')";
+	$result = mysqli_query($conn, $sql);
 
-		if(mysqli_query($db, $sql)){
-		    //echo "Records inserted successfully.";
-		} else{
-		    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
-		}
+	if (mysqli_num_rows($result) > 0) {
+	    // output data of each row
+	    while($row = mysqli_fetch_assoc($result)) {
+	        $subj_id=row['subj_id'];
+	    }
+
+	*/
+	$date=date('Y-m-d H:i:s');
+	$user_id=$_SESSION['user_id'];
+
+	$sql = "INSERT INTO feedback(dt_time,user_id,lp_id,feedback) values ('$date','$user_id','$lp','$feedback')";
+
+	if(mysqli_query($db, $sql)){
+	    //echo "Records inserted successfully.";
+	} else{
+	    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
+	}
+ 
+	// Close connection
+	mysqli_close($db);
 	}
 ?>
 <!DOCTYPE html>
@@ -41,28 +54,24 @@ if(isset($_POST['save'])) {
 		<div class="jumbotron">
 			<div class="container">
 				<div class="section_header">
-					<h2>Submit Your Lesson Plan...</h2>
+					<h2>Review a Lesson Plan...</h2>
 				</div>
 				<hr>
-				<div class="form_container">
+				<div class="form_container" method="POST">
 					<form method="POST">
-						<div class="form-group">
+						<!--<div class="form-group">
 					    	<label>Lesson Name</label>
 					    	<input type="text" class="form-control" id="lesson_name" name="l_name">
+					  	</div>-->
+					  	<div class="form-group">
+					    	<label>Lesson Plan </label>
+					    	<input type="text" class="form-control" id="lp" name="lp">
 					  	</div>
 					  	<div class="form-group">
-					    	<label>Starter Activity</label>
-					    	<input type="text" class="form-control" id="s_activity" name="s_activity">
+					    	<label>Feedback</label>
+					    	<textarea class="form-control" id="feedback" name="feedback"> </textarea>
 					  	</div>
-					  	<div class="form-group">
-					    	<label>Objective</label>
-					    	<input type="text" class="form-control" id="obj" name="obj">
-					  	</div>
-					  	<div class="form-group">
-					    	<label>Resource</label>
-					    	<input type="text" class="form-control" id="resource" name="resource">
-					  	</div>
-					  	<div type="hidden" name="is_submit" value=1></div>
+
 					  	<div style="text-align: center; margin-top: 30px">
 					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px" name="save">Submit</button>
 					  	</div>
@@ -75,19 +84,10 @@ if(isset($_POST['save'])) {
 				<span style="color: black">X</span>
 			</div>
 			<div class="side_bar_opt">
-				<a href="/profile.php">Teacher Profile</a>
+				<a href="/profile.php">Comment On Video</a>
 			</div>
 			<div class="side_bar_opt">
-				<a href="/quick_start.php">Upload Video</a>
-			</div>
-			<div class="side_bar_opt">
-				<a href="/unit_plan.php">Submit User Plan</a>
-			</div>
-			<div class="side_bar_opt">
-				<a href="/lesson_plan.php">Submit Lesson Plan</a>
-			</div>
-			<div class="side_bar_opt">
-				<a href="/get_feedback.php">Update Learning Plan</a>
+				<a href="/comment_post.php">Comment on post</a>
 			</div>
 			<div class="side_bar_opt">
 				<a href="/logout.php">Logout</a>

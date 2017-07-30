@@ -1,50 +1,10 @@
 <?php
-
-//echo "Here";
-session_start();
-if(!isset($_SESSION['role']))
-{
-	
-    header('location:login.php');
-}
-//echo "skipped";
-if(isset($_POST)) {
-	//echo "In post";
-include("config.php");
-$un = $_POST['unit_name'];
-$theme_unit = $_POST['theme_unit'];
-$lessons=$_POST['lesson'];
-//$subj=$_POST["Subject"];
-/*
-$sql = "select subj_id from subjects where subject=$subj ;
-
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        $subj_id=row['subj_id'];
-    }
-
-*/
-$sql = "INSERT INTO units (unit_name,theme_unit,no_of_lesson) VALUES ('$un','$theme_unit','$lessons')";
-
-if(mysqli_query($db, $sql)){
-    //echo "Records inserted successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($db);
-}
- 
-// Close connection
-mysqli_close($db);
-}
+	session_start();
+	if(!isset($_SESSION['role']))
+	{
+		header("location: login.php");
+	}
 ?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -58,7 +18,6 @@ mysqli_close($db);
 				<span>&#9776</span>
 			</div>
 		</div>
-
 		<div class="jumbotron">
 			<div class="container">
 				<div class="section_header">
@@ -66,7 +25,7 @@ mysqli_close($db);
 				</div>
 				<hr>
 				<div class="form_container">
-					<form method="POST" action="">
+					<form>
 						<div class="form-group">
 					    	<label for="unit_name">Unit Name</label>
 					    	<input type="text" class="form-control" id="unit_name" name="unit_name">
@@ -76,72 +35,20 @@ mysqli_close($db);
 					    	<input type="text" class="form-control" id="theme_unit" name="theme_unit">
 					  	</div>
 					  	<div class="form-group">
-					    	<label for="lesson_1">Number of Lessons </label>
-					    	<input type="text" class="form-control" id="lesson" name="lesson">
+					    	<label for="lesson_1">Lesson no</label>
+					    	<input type="text" class="form-control" id="lesson-no-1" name="lesson_1">
 					  	</div>
 					  	<div class="form-group">
-					    	<label for="Subject">Subject Name</label>
-					    	<input type="text" class="form-control" id="Subject" name="Subject">
+					    	<label for="lesson_2">Lesson no</label>
+					    	<input type="text" class="form-control" id="lesson-no-2" name="lesson_2">
 					  	</div>
 					  	<div class="form-group">
-					    	<label for="standard">Standard</label>
-					    	<input type="text" class="form-control" id="standard" name="standard">
+					    	<label for="lesson_3">Lesson no</label>
+					    	<input type="text" class="form-control" id="lesson-no-3" name="lesson_3">
 					  	</div>
 					  	<div style="text-align: center; margin-top: 30px">
 					  		<button type="submit" class="btn btn-default btn-success" style="width: 120px">Submit</button>
 					  	</div>
-						
-						<div>
-						<p>Upload image of your work, if you like!</p>
-						<form action="imgup.php" method="post"
-enctype="multipart/form-data">
-<label for="file">Filename:</label>
-<input type="file" name="file" id="file"><br>
-<input type="submit" name="submit" value="Submit">
-</form>
-
-<?php
-if(isset($_POST['submit'])) {
-
-$target_dir = "\images";
-$target_file = $target_dir.basename($_FILES["file"]["name"]);
-$uploadOk = 1;
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-
-
- $image=basename( $_FILES["file"]["name"],".jpg");
-echo $image;
-  // used to store the filename in a variable
-
-    //store in the data in your database
- $conn = mysqli_connect("localhost","root","");
-// Check connection
- mysqli_select_db($conn,'ceque');
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "INSERT INTO imgup VALUES ('$image')";
-    mysql_query($sql); 
-
-if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-mysqli_close($conn);
-
-    
-
-
-}
-
-?>
-
-						
-						</div>
 					</form>
 				</div>
 			</div>
