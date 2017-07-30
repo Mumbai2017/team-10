@@ -461,6 +461,7 @@ $("#select-file-button").click(function () {
           var uploadResponse = JSON.parse(data);
           Vid = uploadResponse.id;
           console.log('Upload complete for video ' + uploadResponse.id);
+              console.log(Vid)
               window.location.href = "savelink.php?link="+Vid;
         }.bind(this)
 

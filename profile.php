@@ -214,38 +214,47 @@ console.log("WTF");
   
 
 </script>
+<style type="text/css">
+body{
+	background-color: #eee;
+}
+.jumbotron{
+	padding: 20px;
+	border-radius: 5px;
+	background-color: white;
+  
+}
+.{
+
+}
+</style>
 </head>
 
 <body>
-	<div class="row">
-		<div class="col-md-2">
-			<div class="form-group">
-  <label for="sel1">Select list:</label>
-  <select class="form-control" id="sel1">
-    <option>Lesson 1</option>
-    <option>Lesson 2</option>
-    <option>Lesson 3</option>
-    <option>Lesson 4</option>
-  </select>
-</div>>
-</div>
+	<div style="margin: 20px auto; width: 100%; max-width: 300px">
+		<div class="form-group">
+		  <label for="sel1">Select list:</label>
+		  <select class="form-control" id="sel1">
+		    <option>Lesson 1</option>
+		    <option>Lesson 2</option>
+		    <option>Lesson 3</option>
+		    <option>Lesson 4</option>
+		  </select>
 		</div>
+	</div>
 
-	
-		<div id="videobox" class="col-md-8">
-			<div id="l1" class="row">
-				<h3>Lesson 1</h3>
-
-				<div id="col-l1" class="col-md-12">
+	<div style="width:100%; display: flex; flex-wrap: wrap">
+		<div id="videobox" style="width: 60%">
+			<div style>
+				<div style="text-align: center">
 					<p id="display"></p>
-    <div id="player"></div>
-    <button id="M7lc1UVf-VE" class="commentbutton">Show Comments</button>
-        <button class="recordbutton">Record Audio Comment</button>
-        <button class="stopbutton">Stop Recording</button>
+	    			<div id="player"></div>
 
-
-
-
+			    	<div style="width: 100%; display: flex; flex-wrap:wrap; max-width: 640px; margin: 0px auto">
+		    			<div style="width: 32%;"><button style="width:100%" id="M7lc1UVf-VE" class="commentbutton">Show Comments</button></div>
+		    			<div style="width: 32%; margin-left: 2%; margin-right: 2%"><button style="width:100%" class="recordbutton">Record Audio Comment</button></div>
+		    			<div style="width: 32%;"><button style="width: 100%" class="stopbutton">Stop Recording</button></div>
+			    	</div>
 				</div>
 			</div>
 			<div id="l2" class="row">
@@ -283,20 +292,18 @@ console.log("WTF");
 			</div>
 
 			</div>
+		
 
 
-		<div id="commentbox1" class="col-md-4">
-			<div class="jumbotron">
-			<div class="row">
-				<div class="col-md-12">
+		<div id="commentbox1" style="width: 40%">
+			<div>
+				<div>
 					<div class="form-group">
-  <label for="comment">Comment:</label>
-  <textarea class="form-control" rows="5" id="comment"></textarea>
-  <button class="submitcomment">Submit Comment</button>
-</div>
+					  <label for="comment" style="font-size: 20px; margin-bottom: 20px">Comment:</label>
+					  <textarea class="form-control" rows="5" id="comment" style="margin-bottom: 10px"></textarea>
+					  <button class="submitcomment">Submit Comment</button>
+					</div>
 				</div>
-
-
 			</div>
 			<div class="row">
 				<div id="commentbox" class="col-md-12">
@@ -379,9 +386,9 @@ display = document.getElementById('display');
    	 console.log(m);
    	 m=parseInt(m)
    	 m=m.toString()
-   	 $( "#commentbox" ).children().css( "background-color", "white" );
+   	 $( "#commentbox" ).children().css({"background-color":"white","padding":"20px"});
 
-   	 $('#'+m).css("background-color","blue")
+   	 $('#'+m).css("background-color","#ffa300");
 
 
    }   
